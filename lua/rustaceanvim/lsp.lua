@@ -167,6 +167,13 @@ M.start = function(bufnr)
   lsp_start_config.name = 'rust-analyzer'
   lsp_start_config.filetypes = { 'rust' }
 
+  if
+    lsp_start_config.settings['rust-analyzer'].server ~= nil
+    and lsp_start_config.settings['rust-analyzer'].server.extraEnv ~= nil
+  then
+    lsp_start_config.cmd_env = lsp_start_config.settings['rust-analyzer'].server.extraEnv
+  end
+
   local custom_handlers = {}
   custom_handlers['experimental/serverStatus'] = server_status.handler
 
